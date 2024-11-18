@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- icons css file --}}
-    <link rel="stylesheet" href="{{asset('CSS/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
     {{-- css file --}}
-    <link rel="stylesheet" href="{{asset('CSS/master.css')}}">
+    <link rel="stylesheet" href="{{asset('css/master.css')}}">
     <title>@yield('titleOfPage','الصفحة الرئيسية')</title>
 </head>
 <body>
