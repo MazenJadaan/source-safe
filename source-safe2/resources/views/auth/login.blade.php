@@ -58,14 +58,14 @@
                     </div>
                                         @endif
 
-                    <form method="POST" action="#" id="login-form">
-                        @csrf
+                                        <form method="POST" action="{{ route('login') }}" id="login-form">
+                                            @csrf
                         <div class="form-group">
-                            <label for="email_or_username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="email_or_username" id="email_or_username"
-                                   value="{{ old('email_or_username') }}"
+                            <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="email" id="email"
+                                   value="{{ old('email') }}"
                                    placeholder="Enter Your email or username"/>
-@error('email_or_username')
+@error('email')
                             <span class="text-danger">{{ "not valid" }}</span>
 @enderror
                         </div>
