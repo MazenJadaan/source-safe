@@ -1,0 +1,63 @@
+.header {
+    background: #FFFFFF; /* White color */
+    height: 80px; /* Increased height */
+    width: calc(100% - 250px); /* Full width minus sidebar */
+    margin-left: -20px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    position: fixed; /* Stick to the top */
+    top: 0;
+    z-index: 1000;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-container .search-input {
+    padding-right: 40px; /* Make space for the icon */
+    border: 1px solid #0077B6; /* Match system colors */
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-container .search-icon {
+    right: 15px; /* Adjust position */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #0077B6; /* System matching color */
+    pointer-events: none; /* Prevent icon from blocking input clicks */
+}
+
+.search-container input {
+    border: 1px solid #CAF0F8; /* Border with one of your colors */
+    border-radius: 20px;
+    padding: 0.6rem 1.2rem; /* Adjust padding for better proportions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: white; /* Focused border color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.27);
+}
+
+.badge {
+    font-size: 0.75rem;
+}
+
+.dropdown-menu {
+    border-radius: 10px; /* Softer dropdown edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Modern shadow for the dropdown */
+}
+
+.btn.btn-outline-light {
+    color: #0077B6; /* Button color matching your palette */
+}
+
+.btn.btn-outline-light:hover {
+    color: #03045E;
+}
