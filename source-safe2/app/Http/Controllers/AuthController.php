@@ -11,10 +11,10 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function loginPage(){
+    public function login(){
         return view('auth.login');
     }
-    public function login(AuthRequest $request)
+    public function doLogin(AuthRequest $request)
     {
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');

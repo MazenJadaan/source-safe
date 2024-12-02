@@ -12,4 +12,8 @@ class GroupService
     {
       $this->GroupRepository = $GroupRepository ;
     }
+    public function createGroup( $request, $userId){
+
+    }
+
 }

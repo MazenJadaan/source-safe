@@ -15,14 +15,15 @@ return new class extends Migration
             $table->integer('id')->autoIncrement(); // Auto-incrementing primary key
             $table->string('file_name'); // Name of the file
             $table->string('file_path'); // Path to the file
-            $table->unsignedBigInteger('uploaded_by'); // User ID who uploaded the file
-            $table->unsignedBigInteger('group_id'); // Group ID to which the file is uploaded
+            $table->integer('uploaded_by');
+            $table->foreign('uploaded_by')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('group_id'); // Group ID to which the file is uploaded
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending'); // File status
             $table->text('remarks')->nullable(); // Optional remarks (e.g., rejection reason)
             $table->timestamps(); // Created and updated timestamps
-            // Foreign keys
-            $table->foreign('uploaded_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+
+
         });
     }
 

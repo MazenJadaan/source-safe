@@ -11,5 +11,6 @@ class UserRepository extends BaseRepository
         parent::__construct($model);
     }
 
+
     // Add any User-specific repository logic here
 }
