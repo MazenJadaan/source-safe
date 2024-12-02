@@ -25,3 +25,6 @@ Route::get('group/create',[GroupController::class,'create'])->name('group.create
 
 
 });
+
+
+Route::view("Files/All Files","files.allFiles");
