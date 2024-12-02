@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1fdd667476f8329c5e16a8d92576ba89",
+    "content-hash": "3dd2b504b1bf0f668db15e90a733a963",
     "packages": [
         {
             "name": "brick/math",
@@ -1185,6 +1185,60 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
+            "name": "koriym/null-object",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/koriym/Koriym.NullObject.git",
+                "reference": "97687d240413a11f482c960391f50cdc4fe9b98b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/koriym/Koriym.NullObject/zipball/97687d240413a11f482c960391f50cdc4fe9b98b",
+                "reference": "97687d240413a11f482c960391f50cdc4fe9b98b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.4",
+                "doctrine/annotations": "^1.14 || ^2.0",
+                "phpunit/phpunit": "^8.5.34 || ^9.6"
+            },
+            "type": "library",
+            "extra": {
+                "bamarni-bin": {
+                    "forward-command": true,
+                    "bin-links": true
+                }
+            },
+            "autoload": {
+                "files": [
+                    "autoload.php"
+                ],
+                "psr-4": {
+                    "Koriym\\NullObject\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Akihito Koriyama",
+                    "email": "akihito.koriyama@gmail.com"
+                }
+            ],
+            "description": "Null object generator",
+            "support": {
+                "issues": "https://github.com/koriym/Koriym.NullObject/issues",
+                "source": "https://github.com/koriym/Koriym.NullObject/tree/1.0.4"
+            },
+            "time": "2023-09-29T06:40:29+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v11.32.0",
             "source": {
@@ -1588,6 +1642,75 @@
                 "source": "https://github.com/laravel/serializable-closure"
             },
             "time": "2024-11-11T17:06:04+00:00"
+        },
+        {
+            "name": "laravel/telescope",
+            "version": "v5.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/telescope.git",
+                "reference": "7ee46fbea8e3b01108575c8edf7377abddfe8bb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/7ee46fbea8e3b01108575c8edf7377abddfe8bb9",
+                "reference": "7ee46fbea8e3b01108575c8edf7377abddfe8bb9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^8.37|^9.0|^10.0|^11.0",
+                "php": "^8.0",
+                "symfony/console": "^5.3|^6.0|^7.0",
+                "symfony/var-dumper": "^5.0|^6.0|^7.0"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "laravel/octane": "^1.4|^2.0|dev-develop",
+                "orchestra/testbench": "^6.40|^7.37|^8.17|^9.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.0|^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Telescope\\TelescopeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Telescope\\": "src/",
+                    "Laravel\\Telescope\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "mohamed@laravel.com"
+                }
+            ],
+            "description": "An elegant debug assistant for the Laravel framework.",
+            "keywords": [
+                "debugging",
+                "laravel",
+                "monitoring"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/telescope/issues",
+                "source": "https://github.com/laravel/telescope/tree/v5.2.6"
+            },
+            "time": "2024-11-25T20:34:58+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -8882,12 +9005,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
