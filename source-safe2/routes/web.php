@@ -20,5 +20,5 @@ Route::middleware(['auth',RefreshSession::class])->group(function () {
     Route::get('/dashboard',function (){
         return view('layouts.app');
     })->name('dashboard');
-
+    
 });
