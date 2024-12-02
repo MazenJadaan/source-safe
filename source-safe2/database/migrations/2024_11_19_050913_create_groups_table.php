@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->string('name');
-            $table->string('image');
+            $table->string('image')->default('group-images/default-group.jpg')->nullable();
             $table->timestamps();
         });
     }

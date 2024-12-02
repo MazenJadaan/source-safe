@@ -113,6 +113,7 @@
 </style>
 
 @section('content')
+    @include('components.alert.AlertMessages')
     <div class="content-wrapper">
         <!-- Header Section -->
         <div class="content-header d-flex justify-content-between align-items-center mb-4">
@@ -133,7 +134,7 @@
         <div class="content-body">
             <div class="container">
                 <div class="form-container">
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('group.store')}}"  enctype="multipart/form-data">
                         @csrf
                         <div class="row gap-5">
                             <!-- Group Name -->
@@ -145,7 +146,7 @@
                             <div class="col-md-5 mb-3">
                                 <label for="image" class="form-label" style="position: relative ;bottom: 140px">Group Image</label>
                                 <div class="image-preview-container">
-                                    <img id="image-preview" src="{{ asset('img/default-group.jpg') }}" alt="Group Image" class="group-image-preview">
+                                    <img id="image-preview" src="{{\App\Utils\FileUtility::getFileUrl('group-images/default-group.jpg')}}" alt="Group Image" class="group-image-preview">
                                     <label for="image" class="add-image-btn">
                                         <i class="bi bi-plus"></i>
                                         <input type="file" name="image" id="image" class="form-control" style="display: none;" accept="image/*">
@@ -162,7 +163,7 @@
                                 @foreach($users as $user)
                                     <label class="user-item">
                                         <input type="checkbox" name="users[]" value="{{ $user->id }}">
-                                        <img @if($user->photo)  src="{{ asset($user->photo)}}"  @else  src="{{ asset('img/undraw_profile.svg')}}" @endif alt="{{ $user->name }}" class="user-photo">
+                                        <img @if($user->photo)  src="{{asset($user->photo)}}"  @else  src="{{ \App\Utils\FileUtility::getFileUrl('img/undraw_profile.svg')}}" @endif alt="{{ $user->name }}" class="user-photo">
                                         <span>{{ $user->name }}</span>
                                     </label>
                                 @endforeach

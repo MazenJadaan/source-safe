@@ -19,12 +19,18 @@ class GroupController extends Controller
         $this->userService = $userService ;
     }
     public function create(){
-        $users = $this->userService->getAllUser();
+        $users = $this->userService->getAllUserExceptAuth();
         return view('groups.create',compact('users'));
     }
     public function store(CreateGroupRequest $request)
     {
-        $this->groupService->createGroup($request->validated(), Auth::id());
-        return redirect()->route('groups.index')->with('success', 'Group created successfully!');
+        try {
+            $this->groupService->createGroup($request->validated(), Auth::id());
+            // Success message
+            return redirect()->back()->with('success', 'Group created successfully!');
+        } catch (\Exception $e) {
+            // Error message
+            return redirect()->back()->with('error', 'Failed to create group: ' . $e->getMessage());
+        }
     }
 }

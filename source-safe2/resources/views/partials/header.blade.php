@@ -21,7 +21,7 @@
         <!-- User Dropdown -->
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-dark text-decoration-none" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{asset('/img/undraw_profile.svg')}}" alt="User Photo" class="rounded-circle" width="50" height="50">
+                <img src="{{\App\Utils\FileUtility::getFileUrl('/img/undraw_profile.svg') }}" alt="User Photo" class="rounded-circle" width="50" height="50">
                 <span class="ms-2 fw-bold" style="color: #0077B6">John Doe</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">

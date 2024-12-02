@@ -11,8 +11,8 @@ class UserService
     {
         $this->UserRepository = $UserRepository;
     }
-    public function getAllUser(){
-        return $this->UserRepository->getAll();
+    public function getAllUserExceptAuth(){
+        return $this->UserRepository->getAllExceptAuth();
     }
 
 

@@ -11,12 +11,26 @@ class GroupRepository extends BaseRepository
         parent::__construct($model);
     }
 
-    public function addUsersToGroup($group, $users, $isAdmin = false)
+    /**
+     * Add users to a group with admin status.
+     *
+     * @param Group $group
+     * @param array $users
+     * @param int $adminId
+     */
+    public function attachUsers(Group $group, array $users, $adminId)
     {
-        $group->users()->sync(
-            collect($users)->mapWithKeys(function ($userId) use ($isAdmin) {
-                return [$userId => ['is_admin' => $isAdmin]];
-            })->toArray()
-        );
+        $groupUsers = [];
+
+        // Add all selected users
+        if(!isset($users)){
+            foreach ($users as $userId) {
+                $groupUsers[$userId] = ['is_admin' => $userId === $adminId];
+            }
+        }
+        // Add the creator as admin
+        $groupUsers[$adminId] = ['is_admin' => true];
+
+        $group->users()->sync($groupUsers);
     }
 }

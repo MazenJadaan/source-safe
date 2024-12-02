@@ -54,7 +54,7 @@
                             </ul>
                         </div>
                     @endif
-                                        <form method="POST" action="{{ route('login') }}" id="login-form">
+                                        <form method="POST" action="{{ route('doLogin') }}" id="login-form">
                                             @csrf
                         <div class="form-group">
                             <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
