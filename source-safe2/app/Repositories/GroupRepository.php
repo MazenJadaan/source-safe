@@ -10,4 +10,13 @@ class GroupRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function addUsersToGroup($group, $users, $isAdmin = false)
+    {
+        $group->users()->sync(
+            collect($users)->mapWithKeys(function ($userId) use ($isAdmin) {
+                return [$userId => ['is_admin' => $isAdmin]];
+            })->toArray()
+        );
+    }
 }

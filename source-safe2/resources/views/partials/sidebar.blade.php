@@ -6,7 +6,7 @@
     <ul>
         <li class="section-title">Main Section</li>
         <li>
-            <a href="#"><i class="bi bi-house"></i> Dashboard</a>
+            <a href="{{route('dashboard')}}"><i class="bi bi-house"></i> Dashboard</a>
         </li>
         <li class="has-submenu">
             <a href="javascript:void(0);" class="submenu-toggle">
@@ -25,7 +25,7 @@
                 <i class="bi bi-chevron-down submenu-icon"></i>
             </a>
             <ul class="submenu">
-                <li><a href="#"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> Create Group</a></li>
+                <li><a href="{{route('group.create')}}"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> Create Group</a></li>
                 <li><a href="#"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> My Groups</a></li>
             </ul>
         </li>
