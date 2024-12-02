@@ -54,7 +54,7 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => ['single', 'daily', 'slack', 'papertrail', 'syslog', 'database'],  // تضمين القناة database هنا
             'ignore_exceptions' => false,
         ],
 
@@ -126,7 +126,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        'database' => [
+            'driver' => 'monolog',
+            'handler' => \App\Logging\DatabaseLogHandler::class,
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
 
     ],
 
 ];
+

@@ -12,19 +12,59 @@ class LogMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        // Log the request path before handling the request
-        Log::debug("Handling request to " . $request->path());
+        try {
+            $this->before($request);
 
-        // Process the request and get the response
-        $response = $next($request);
+            $response = $next($request);
+            $this->onException($request,$response);
+            $this->after($request, $response);
 
-        // Log the response status code after handling the request
-        Log::info("Request to " . $request->path() . " completed with status code " . $response->getStatusCode());
+            return $response;
+        } catch (\Exception $e) {
+            return $this->onException($request, $e);
+        }
+    }
 
-        return $response;
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function before(Request $request)
+    {
+        Log::debug("Before handling request to " . $request->path());
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Symfony\Component\HttpFoundation\Response  $response
+     * @return void
+     */
+    protected function after(Request $request, Response $response)
+    {
+        Log::info("After handling request to " . $request->path() . " completed with status code " . $response->getStatusCode());
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function onException(Request $request, \Exception $exception): Response
+    {
+        Log::error("Exception occurred while handling request to " . $request->path() . ": " . $exception->getMessage());
+
+        return response()->json([
+            'error' => 'An unexpected error occurred.',
+            'message' => $exception->getMessage(),
+        ], 500);
     }
 }
