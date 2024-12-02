@@ -1,0 +1,109 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    overflow-y: auto;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Other styles remain the same */
+.sidebar .logo {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #CAF0F8;
+    letter-spacing: 1px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar ul li a:hover {
+    color: rgb(0, 119, 182); /* Subtle hover effect */
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #CAF0F8;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.section-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #CAF0F8;
+    color: #CAF0F8;
+}
+.sidebar .has-submenu .submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hide sub-menu initially */
+}
+
+.sidebar .has-submenu .submenu li {
+    padding: 10px 15px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+
+
+/* Toggle icon */
+.sidebar .submenu-toggle {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #CAF0F8;
+    text-decoration: none;
+}
+
+.sidebar .submenu-icon {
+    margin-left: auto; /* Push the icon to the right */
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar .submenu-toggle.active .submenu-icon {
+    transform: rotate(180deg); /* Rotate the icon when active */
+}
+/* Adding a circle indicator to the submenu items */
+.sidebar .submenu .submenu-circle {
+    width: 10px;
+    height: 10px;
+    background-color: #03045e; /* Light blue color for the circle */
+    border-radius: 50%;
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+

@@ -32,7 +32,8 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => env('SESSION_LIFETIME', 120), // Session lifetime in minutes
+    'remember_lifetime' => env('REMEMBER_LIFETIME', 525600), // Remember me cookie lifetime (in minutes)
 
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
 

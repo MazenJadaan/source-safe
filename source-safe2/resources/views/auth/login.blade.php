@@ -46,18 +46,14 @@
                 <div class="signin-form">
 
                     <h2 class="form-title" style="position: relative ; left: 60px">Sign In</h2>
-
-                    <!-- Error Alert -->
-                                        @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                                                            @foreach ($errors->all() as $error)
-                            <li>{{ "error" }}</li>
-                                                            @endforeach
-                        </ul>
-                    </div>
-                                        @endif
-
+                    <!-- General Error Alert -->
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            <ul>
+                                <li>{{ session('error') }}</li>
+                            </ul>
+                        </div>
+                    @endif
                                         <form method="POST" action="{{ route('login') }}" id="login-form">
                                             @csrf
                         <div class="form-group">
@@ -66,7 +62,7 @@
                                    value="{{ old('email') }}"
                                    placeholder="Enter Your email or username"/>
 @error('email')
-                            <span class="text-danger">{{ "not valid" }}</span>
+                            <span class="text-danger">{{ $message }}</span>
 @enderror
                         </div>
                         <div class="form-group">
@@ -97,7 +93,7 @@
 
 <!-- JS -->
 <script src="vendor/jquery/jquery.min.js"></script>
-<script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/layouts.js')}}"></script>
 
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
