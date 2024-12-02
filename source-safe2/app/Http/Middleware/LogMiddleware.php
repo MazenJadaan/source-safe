@@ -22,7 +22,7 @@ class LogMiddleware
             $this->before($request);
 
             $response = $next($request);
-            $this->onException($request,$response);
+          //  $this->onException($request,$response);
             $this->after($request, $response);
 
             return $response;
