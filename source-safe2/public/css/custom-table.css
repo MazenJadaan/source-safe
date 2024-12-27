@@ -1,0 +1,40 @@
+/* General table styling */
+.table-custom {
+    background-color: white;
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Header styling */
+.table-custom thead th {
+    color: #0077B6; /* Header title color */
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle; /* Vertically centers the text */
+    padding: 10px; /* Adds consistent spacing */
+}
+
+/* Row hover effect */
+.table-custom tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Cell styling */
+.table-custom tbody td {
+    text-align: center;
+    vertical-align: middle; /* Vertically centers the content */
+    padding: 10px; /* Adds consistent spacing */
+}
+
+/* Center images */
+.table-custom tbody td img {
+    display: block;
+    margin: 0 auto; /* Centers the image in the cell */
+}
+
+/* Icons next to titles */
+.table-custom .table-icon {
+    margin-right: 5px;
+}

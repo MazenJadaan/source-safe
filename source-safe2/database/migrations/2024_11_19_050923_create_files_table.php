@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('files', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->integer('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('updated_by');
+            $table->integer('updated_by')->nullable();
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

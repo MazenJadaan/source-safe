@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="{{asset('css/sidebar.css')}}">
     <link rel="stylesheet" href="{{asset('css/header.css')}}">
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/custom-table.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/image-picker.css') }}">
+
+
     <style>
         .main-content {
             margin-left: 250px; /* Offset content by the sidebar width */

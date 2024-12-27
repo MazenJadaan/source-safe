@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Group;
+use App\Models\User;
 
 class GroupRepository extends BaseRepository
 {
@@ -32,5 +33,9 @@ class GroupRepository extends BaseRepository
         $groupUsers[$adminId] = ['is_admin' => true];
 
         $group->users()->sync($groupUsers);
+    }
+    public function getUserGroups($userId){
+        $user = User::find($userId);
+        return $user->groups;
     }
 }

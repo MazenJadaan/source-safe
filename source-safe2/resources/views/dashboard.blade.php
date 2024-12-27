@@ -4,7 +4,14 @@
 
 @section('content')
 @include('components.alert.AlertMessages')
-            <h2>Welcome to the Dashboard</h2>
-            <p>This is the main content area. Add more sections here as needed.</p>
+<div style="background-image: url('{{ asset('storage/img/dashboard2.png') }}');
+            background-size: cover;
+            background-position: center;
+            height: 84vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;">
+</div>
 
 @endsection

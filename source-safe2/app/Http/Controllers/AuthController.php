@@ -55,7 +55,7 @@ class AuthController extends Controller
         session()->flush();
         cookie()->queue(cookie()->forget('refresh_token'));
 
-        return redirect('/login');
+        return redirect('/');
     }
     public function refreshToken(Request $request)
     {
