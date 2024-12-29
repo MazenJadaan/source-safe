@@ -22,7 +22,6 @@ class LogMiddleware
             $this->before($request);
 
             $response = $next($request);
-          //  $this->onException($request,$response);
             $this->after($request, $response);
 
             return $response;
@@ -61,7 +60,6 @@ class LogMiddleware
     protected function onException(Request $request, \Exception $exception): Response
     {
         Log::error("Exception occurred while handling request to " . $request->path() . ": " . $exception->getMessage());
-
         return response()->json([
             'error' => 'An unexpected error occurred.',
             'message' => $exception->getMessage(),

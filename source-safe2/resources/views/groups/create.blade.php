@@ -120,7 +120,7 @@
             <div class="breadcrumbs">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
+                        <li class="breadcrumb-item" style="color: #0077B6">
                             <i class="bi bi-house"></i>
                             <a href="{{ route('dashboard') }}" style="color: #0077B6; text-decoration: none;">Home</a>
                         </li>
@@ -199,23 +199,7 @@
             }
         });
     </script>
-    <script>
-        document.getElementById('image').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const preview = document.getElementById('image-preview');
 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            } else {
-                // Reset to the default image if no file is chosen
-                preview.src = "{{ asset('img/default-group.jpg') }}";
-            }
-        });
-    </script>
 
 @endsection
 

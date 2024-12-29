@@ -11,4 +11,5 @@ class FilesRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
 }

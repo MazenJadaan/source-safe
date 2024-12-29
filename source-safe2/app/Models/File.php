@@ -27,7 +27,7 @@ protected $fillable = [
     {
         return $this->belongsTo(User::class, 'created_by');
     }
-    public function updated()
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
     }

@@ -33,9 +33,9 @@ class BaseRepository
         $entity = $this->findById($id);
         if ($entity) {
             $entity->update($data);
-            return $entity;
+            return true;
         }
-        return null;
+        return false;
     }
 
     public function delete($id)

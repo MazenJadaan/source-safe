@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateGroupRequest;
+use App\Http\Requests\UpdateGroupRequest;
 use App\Services\GroupService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -17,6 +18,11 @@ class GroupController extends Controller
     {
         $this->groupService = $groupService ;
         $this->userService = $userService ;
+    }
+    public function myGroups(){
+        $userId = Auth::id();
+        $groups = $this->groupService->getUserGroups($userId);
+        return view('groups.user-groups',compact('groups'));
     }
     public function create(){
         $users = $this->userService->getAllUserExceptAuth();
@@ -33,4 +39,29 @@ class GroupController extends Controller
             return redirect()->back()->with('error', 'Failed to create group: ' . $e->getMessage());
         }
     }
+    public function update(UpdateGroupRequest $request , $group){
+        try {
+            $isUpdated =  $this->groupService->updateGroup($request->validated(),$group);
+            if ($isUpdated){
+                return redirect()->back()->with('success', 'Group updated successfully!');
+            }
+            // Success message
+        } catch (\Exception $e) {
+            // Error message
+            return redirect()->back()->with('error', 'Failed to updated group: ' . $e->getMessage());
+        }
+    }
+    public function delete($id){
+     try {
+         $is_deleted = $this->groupService->deleteGroup($id);
+         if ($is_deleted) {
+             return redirect()->back()->with('success', 'Group deleted successfully!');
+         }
+     }
+         catch(\Exception $e){
+             return redirect()->back()->with('error', 'Failed to create group: ' . $e->getMessage());
+
+         }
+     }
+
 }

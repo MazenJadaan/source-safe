@@ -13,6 +13,17 @@ class GroupService
     {
       $this->GroupRepository = $GroupRepository ;
     }
+
+    public function getAllGroups(){
+        return $this->GroupRepository->getAll();
+    }
+
+    public function getUserGroups($userId){
+        return $this->GroupRepository->getUserGroups($userId);
+    }
+    public function getGroupById($id){
+        return $this->GroupRepository->findById($id);
+    }
     /**
      * Create a group and associate users.
      *
@@ -22,19 +33,41 @@ class GroupService
      */
     public function createGroup(array $data, $creatorId)
     {
-        // Handle group image upload
         if (isset($data['image'])) {
             $data['image'] = FileUtility::storeFile($data['image'], 'group-images');
         }
 
-        // Create the group
         $group = $this->GroupRepository->create([
             'name' => $data['name'],
             'image' => isset($data['image']) ? $data['image'] : 'group-images/default-group.jpg',
         ]);
 
-        // Attach users to the group
         $this->GroupRepository->attachUsers($group, isset($data['users']) ? $data['users'] : [], $creatorId);
+    }
+    public function updateGroup(array $data, $groupId)
+    {
+        // Retrieve the group object using its ID
+        $group = $this->GroupRepository->findById($groupId);
+
+        if (!$group) {
+            throw new \Exception('Group not found');
+        }
+
+        // Handle image update
+        if (isset($data['image'])) {
+            $data['image'] = FileUtility::storeFile($data['image'], 'group-images');
+
+            // Delete the old image
+            if ($group->image && $group->image !== 'group-images/default-group.jpg') {
+                FileUtility::deleteFile($group->image);
+            }
+        }
+
+        return $this->GroupRepository->update($group->id, $data);
+    }
+
+    public function deleteGroup($id){
+        return $this->GroupRepository->delete($id);
     }
 
 }
