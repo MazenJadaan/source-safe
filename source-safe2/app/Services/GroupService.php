@@ -18,8 +18,8 @@ class GroupService
         return $this->GroupRepository->getAll();
     }
 
-    public function getUserGroups($userId){
-        return $this->GroupRepository->getUserGroups($userId);
+    public function getUserGroups($userId,$search = null, $perPage = 10){
+        return $this->GroupRepository->getUserGroups($userId,$search,$perPage);
     }
     public function getGroupById($id){
         return $this->GroupRepository->findById($id);

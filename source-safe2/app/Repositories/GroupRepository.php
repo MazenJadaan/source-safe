@@ -34,8 +34,12 @@ class GroupRepository extends BaseRepository
 
         $group->users()->sync($groupUsers);
     }
-    public function getUserGroups($userId){
+    public function getUserGroups($userId,$search = null,$perPage =10){
         $user = User::find($userId);
-        return $user->groups;
+        $query = $user->groups();
+        if ($search) {
+            $query->where('name', 'LIKE', '%' . $search . '%');
+        }
+        return $query->paginate($perPage);
     }
 }
