@@ -20,11 +20,6 @@ class FilesController extends Controller
         $this->groupService = $groupService;
     }
 
-    public function create(){
-       $groups  =  $this->groupService->getUserGroups(Auth::id());
-        return view('files.create',compact('groups'));
-    }
-
     public function store(UploadFileRequest $request){
         try {
             $this->filesService->uploadFile($request->validated(), Auth::id());
@@ -34,5 +29,20 @@ class FilesController extends Controller
             // Error message
             return redirect()->back()->with('error', 'Failed to upload file: ' . $e->getMessage());
         }
+    }
+
+    public function getFilesUser(Request $request){
+        $user = Auth::user();
+        $search = $request->input('search');
+        $groups  =  $this->groupService->getUserGroups(Auth::id());
+        $files = $this->filesService->getFilesForUsers($user,$search, 5);
+        return view('files.user-files', compact('files', 'groups'));
+    }
+    public function getMyFiles(Request $request){
+        $user = Auth::user();
+        $search = $request->input('search');
+        $files = $this->filesService->getMyReservationFiles($user,$search,5);
+        return view('files.user-reservation-files', compact('files'));
+
     }
 }

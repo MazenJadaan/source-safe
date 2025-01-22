@@ -1,6 +1,7 @@
 @extends('layouts.app')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 @section('title','My Groups')
+@section('search_action', route('userGroups'))
 
 @section('content')
     @include('components.alert.AlertMessages')
@@ -47,7 +48,7 @@
                     <td class="text-muted">{{ $group->name }}</td>
                     <td>
                         <div>
-                            <a href="#" class="btn btn-outline-success btn-md" title="details">
+                            <a href="{{route('group.details',$group->id)}}" class="btn btn-outline-success btn-md" title="details">
                                 <i class="bi bi-eye"></i>
                             </a>
                             <button class="btn btn-outline-info btn-md" title="edit"
@@ -74,6 +75,9 @@
             @endforelse
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+            {{ $groups->links() }}
+        </div>
     </div>
 
     <!-- Edit Group Modal -->

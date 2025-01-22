@@ -18,8 +18,8 @@ class GroupService
         return $this->GroupRepository->getAll();
     }
 
-    public function getUserGroups($userId){
-        return $this->GroupRepository->getUserGroups($userId);
+    public function getUserGroups($userId,$search = null, $perPage = 10){
+        return $this->GroupRepository->getUserGroups($userId,$search,$perPage);
     }
     public function getGroupById($id){
         return $this->GroupRepository->findById($id);
@@ -68,6 +68,17 @@ class GroupService
 
     public function deleteGroup($id){
         return $this->GroupRepository->delete($id);
+    }
+
+    public function getGroupMembers($groupId)
+    {
+        return $this->GroupRepository->getGroupMembers($groupId);
+    }
+    public function getGroupFiles($groupId){
+        return $this->GroupRepository->getGroupFiles($groupId);
+    }
+    public function getFilesOrders($groupId){
+        return $this->GroupRepository->getFilesOrders($groupId);
     }
 
 }

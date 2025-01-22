@@ -24,4 +24,12 @@ class FilesService
         $this->FilesRepository->create($data);
     }
 
+    public function getFilesForUsers($user,$search = null, $perPage = 10)
+    {
+        return $this->FilesRepository->getAllUserFilesByGroups($user->groups->pluck('id')->toArray(), $search,$perPage);
+    }
+    public function getMyReservationFiles($user,$search = null, $perPage = 10){
+        return $this->FilesRepository->getMyReservationFiles($user->id,$search,$perPage);
+    }
+
 }

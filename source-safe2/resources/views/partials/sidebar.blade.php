@@ -15,10 +15,10 @@
                 <li><a href="{{route('userGroups')}}"><i class="bi bi-people-fill" ></i> My Groups</a></li>
 
         <li class="section-title">Files</li>
-{{--                <li><a href="{{route('file.create')}}"><i class="fas fa-file-circle-plus" ></i> Add New File</a></li>--}}
-        <li><a href="{{route('file.create')}}"><i class="bi-folder-fill" ></i> All Files</a></li>
-                <li><a href="#"><i class="bi-file-text-fill"></i> My Files</a></li>
+               <li><a href="{{route('user.files')}}"><i class="bi-folder-fill" ></i>Files</a></li>
+                <li><a href="{{route('my.reservation.files')}}"><i class="bi-file-text-fill"></i> My Files</a></li>
 
-
+        <li class="section-title">Reports</li>
+        <li><a href="#"><i class="bi-folder-fill" ></i>Tracing</a></li>
     </ul>
 </div>

@@ -1,0 +1,27 @@
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.8rem;
+    color: #03045E;
+}
+
+.card .stretched-link {
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.card .stretched-link:hover {
+    color: #00B4D8;
+    text-decoration: underline;
+}
+
+hr {
+    border-color: #0077B6;
+}

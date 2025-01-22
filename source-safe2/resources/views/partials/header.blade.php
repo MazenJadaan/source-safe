@@ -1,9 +1,24 @@
 
 <div class="header d-flex align-items-center justify-content-between px-4 shadow-sm">
     <!-- Search Field -->
-    <div class="search-container d-flex align-items-center position-relative">
-        <input type="text" class="form-control search-input" placeholder="Search..." style="width: 600px; padding-right: 40px;">
-        <i class="bi bi-search search-icon position-absolute" style="right: 15px; top: 50%; transform: translateY(-50%); color: #0077B6;"></i>
+    <div class="search-container d-flex align-items-center ">
+        <form action="@yield('search_action', '#')" method="GET" class="w-100">
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                class="form-control search-input"
+                placeholder="Search..."
+                style="width: 600px; padding-right: 40px;"
+            >
+            <button
+                type="submit"
+                class="btn search-icon-btn position-absolute"
+                style="position:absolute;  right: 15px; bottom: 10px; transform: translateY(-50%); background: transparent; border: none; color: #0077B6;"
+            >
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
     </div>
 
     <!-- Right Section: Notification and User Dropdown -->
