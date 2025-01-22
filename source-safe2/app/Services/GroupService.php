@@ -70,4 +70,15 @@ class GroupService
         return $this->GroupRepository->delete($id);
     }
 
+    public function getGroupMembers($groupId)
+    {
+        return $this->GroupRepository->getGroupMembers($groupId);
+    }
+    public function getGroupFiles($groupId){
+        return $this->GroupRepository->getGroupFiles($groupId);
+    }
+    public function getFilesOrders($groupId){
+        return $this->GroupRepository->getFilesOrders($groupId);
+    }
+
 }

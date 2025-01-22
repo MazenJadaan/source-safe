@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FilesController;
+use App\Http\Controllers\FilesRequestController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Middleware\RefreshSession;
 use Illuminate\Support\Facades\Route;
 
@@ -27,11 +29,18 @@ Route::middleware(['auth',RefreshSession::class])->group(function () {
     Route::delete('group/delete/{id}', [GroupController::class, 'delete'])->name('group.delete');
     Route::get('group/details/{id}',[GroupController::class,'details'])->name('group.details');
 
-    Route::get('/group/members', [GroupController::class, 'members'])->name('group.members');
-    Route::get('/group/files', [GroupController::class, 'files'])->name('group.files');
-    Route::get('/group/file-reports', [GroupController::class, 'fileReports'])->name('group.file-reports');
-    Route::get('/group/member-reports', [GroupController::class, 'memberReports'])->name('group.member-reports');
-    Route::get('/group/add-file-order', [GroupController::class, 'addFileOrder'])->name('group.add-file-order');
+    Route::get('/group/{id}/members', [GroupController::class, 'members'])->name('group.members');
+    Route::get('/group/{id}/files', [GroupController::class, 'files'])->name('group.files');
+
+
+    Route::get('/file/{id}/reports', [ReportsController::class, 'showFileReports'])->name('file.reports');
+    Route::get('/member/{id}/reports', [ReportsController::class, 'showMemberReports'])->name('member.reports');
+
+
+    Route::get('/group/{id}/files-orders', [GroupController::class, 'filesOrders'])->name('group.request.orders');
+    Route::patch('/file/{id}/accept', [FilesRequestController::class, 'acceptFile'])->name('file.accept');
+    Route::patch('/file/{id}/reject', [FilesRequestController::class, 'rejectFile'])->name('file.reject');
+    Route::get('/file/{id}/download', [FilesRequestController::class, 'downloadFile'])->name('file.download');
 
 
 
@@ -39,7 +48,8 @@ Route::middleware(['auth',RefreshSession::class])->group(function () {
 
     ///////////// files //////////////
 //    Route::get('files/create',[FilesController::class,'create'])->name('file.create');
-    Route::post('files/store',[FilesController::class,'store'])->name('file.store');
+    Route::post('files/upload',[FilesRequestController::class,'upload'])->name('file.request.upload');
+
 
     Route::get('files', [FilesController::class, 'getFilesUser'])->name('user.files');
     Route::get('my-files', [FilesController::class, 'getMyFiles'])->name('my.reservation.files');

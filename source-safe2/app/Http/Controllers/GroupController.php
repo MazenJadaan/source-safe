@@ -68,5 +68,17 @@ class GroupController extends Controller
         $group = $this->groupService->getGroupById($id);
         return view('groups.details',compact('group'));
      }
+     public function members($id){
+         $members = $this->groupService->getGroupMembers($id);
+         return view('groups.group-members', compact('members'));
+     }
+     public function files($id){
+        $files = $this->groupService->getGroupFiles($id);
+        return view('groups.group-files',compact('files'));
+     }
+     public function filesOrders($id){
+         $fileRequests  = $this->groupService->getFilesOrders($id);
+         return view('groups.group-add-files-orders',compact('fileRequests'));
+     }
 
 }

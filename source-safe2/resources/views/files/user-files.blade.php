@@ -70,7 +70,8 @@
                     </td>
                     <td>
                         <div>
-                            @if($file->status === 'free')
+                            <a href="{{ route('file.reports', $file->id) }}" class="btn btn-sm" style="background-color: #0077B6; color: white">Report</a>
+                        @if($file->status === 'free')
                                 <form action="#" method="POST" class="d-inline-block">
                                     @csrf
                                     <button type="submit" class="btn btn-outline-primary btn-sm" title="Reserve and Download File">
@@ -134,37 +135,43 @@
             <p class="font-mono font-semibold text-xl" style="color: white">Upload File</p>
         </div>
 
-        <form action="{{route('file.store')}}" method="POST" enctype="multipart/form-data" class="w-2/3 flex flex-col space-y-4" id="fileForm">
+        <form action="{{ route('file.request.upload') }}" method="POST" enctype="multipart/form-data" class="w-2/3 flex flex-col space-y-4" id="fileForm">
             @csrf
 
+            <!-- File Upload -->
             <label class="text-white font-bold" for="file">Upload Your File Here:</label>
             <input
                 type="file"
                 id="file"
                 name="file"
                 class="p-2 rounded bg-white text-gray-700"
+                required
             >
             @error('file')
             <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
             @enderror
 
+            <!-- File Name -->
             <label class="text-white font-bold" for="file_name">File Name:</label>
             <input
                 type="text"
                 id="file_name"
-                name="name"
+                name="file_name"
                 placeholder="Enter file name"
                 class="p-2 rounded bg-white text-gray-700"
+                required
             >
-            @error('name')
+            @error('file_name')
             <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
             @enderror
 
+            <!-- Group Selection -->
             <label class="text-white font-bold" for="group">Choose The Group:</label>
             <select
                 id="group"
                 name="group_id"
                 class="p-2 rounded bg-white text-gray-700"
+                required
             >
                 @foreach($groups as $group)
                     <option value="{{ $group->id }}">
@@ -176,25 +183,8 @@
             <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
             @enderror
 
-            <label class="text-white font-bold">File Status:</label>
-            <div class="flex items-center space-x-4">
-                <span class="text-white">Free</span>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input
-                        type="checkbox"
-                        id="statusSwitch"
-                        class="sr-only peer"
-                    >
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:bg-green-500 transition duration-200"></div>
-                    <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition peer-checked:translate-x-full"></span>
-                </label>
-                <span class="text-white">Reserved</span>
-            </div>
-            <input type="hidden" name="status" id="statusInput" value="free">
-            @error('status')
-            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-            @enderror
 
+            <!-- Submit Button -->
             <div class="d-flex justify-content-center mt-5">
                 <button
                     type="submit"
@@ -206,16 +196,6 @@
         </form>
     </div>
 
-    <script>
-        document.getElementById('statusSwitch').addEventListener('change', function () {
-            const statusInput = document.getElementById('statusInput');
-            if (this.checked) {
-                statusInput.value = 'reserved';
-            } else {
-                statusInput.value = 'free';
-            }
-        });
-    </script>
     <script>
         function openForm() {
             const modal = document.getElementById('fileModal');

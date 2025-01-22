@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\FileRequest;
 use App\Models\Group;
 use App\Models\User;
 
@@ -41,5 +42,18 @@ class GroupRepository extends BaseRepository
             $query->where('name', 'LIKE', '%' . $search . '%');
         }
         return $query->paginate($perPage);
+    }
+    public function getGroupMembers($groupId = null){
+        return Group::with('users')->findOrFail($groupId)->users;
+    }
+    public function getGroupFiles($groupId = null)
+    {
+        return Group::with('files')->findOrFail($groupId)->files;
+    }
+    public function getFilesOrders($groupId = null)
+    {
+        return FileRequest::where('group_id', $groupId)
+            ->with('uploader') // Assuming 'user' is a relationship to fetch uploader details
+            ->get();
     }
 }

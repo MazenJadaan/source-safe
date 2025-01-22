@@ -22,9 +22,8 @@ class UploadFileRequest extends FormRequest
     {
         return [
             'file' => 'required|file|mimes:docx,txt|max:10240', // Adjust MIME types and size limit
-            'name' => 'required|string|max:255',
+            'file_name' => 'required|string|max:255',
             'group_id' => 'required|exists:groups,id', // Ensure the group exists
-            'status' => 'required|in:free,reserved',   // Validate status is either 'free' or 'reserved'
         ];
     }
 

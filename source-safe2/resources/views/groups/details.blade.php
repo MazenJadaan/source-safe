@@ -18,7 +18,7 @@
                             <!-- Line -->
                             <hr style="border: 1px solid #0077B6; margin: 15px 0;">
                             <!-- Read More Link -->
-                            <a href="{{route('group.members')}}" class="stretched-link text-decoration-none" style="color: #0077B6;">Read More</a>
+                            <a href="{{route('group.members',$group->id)}}" class="stretched-link text-decoration-none" style="color: #0077B6;">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                             </div>
                             <p class="card-text text-dark">Access and manage group files.</p>
                             <hr style="border: 1px solid #0077B6; margin: 15px 0;">
-                            <a href="#" class="stretched-link text-decoration-none" style="color: #0077B6;">Read More</a>
+                            <a href="{{route('group.files',$group->id)}}" class="stretched-link text-decoration-none" style="color: #0077B6;">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                             </div>
                             <p class="card-text text-dark">Add and manage file orders for approval.</p>
                             <hr style="border: 1px solid #0077B6; margin: 15px 0;">
-                            <a href="#" class="stretched-link text-decoration-none" style="color: #0077B6;">Read More</a>
+                            <a href="{{ route('group.request.orders',$group->id) }}" class="stretched-link text-decoration-none" style="color: #0077B6;">Read More</a>
                         </div>
                     </div>
                 </div>
