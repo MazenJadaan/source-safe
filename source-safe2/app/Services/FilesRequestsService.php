@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
-
+use App\Models\Group;
+use App\Notifications\UserNotification;
 use App\Repositories\FilesRepository;
 use App\Repositories\FilesRequestsRepository;
 use App\Utils\FileUtility;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class FilesRequestsService
@@ -22,6 +24,7 @@ class FilesRequestsService
     }
     public function uploadFileRequest($validatedData, $user_id)
     {
+      
         $data = $validatedData;
 
         if (request()->hasFile('file')) {
@@ -29,7 +32,14 @@ class FilesRequestsService
             $data['file_path'] = $filePath;
         }
         $data['uploaded_by'] = $user_id;
+      
+
         $this->FilesRequestsRepository->create($data);
+       
+
+       
+
+    
     }
     public function acceptFileRequest($id)
     {

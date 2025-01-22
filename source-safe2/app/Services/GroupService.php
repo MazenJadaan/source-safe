@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Repositories\GroupRepository;
 use App\Utils\FileUtility;
+use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Log;
 
 class GroupService
 {
@@ -33,6 +36,9 @@ class GroupService
      */
     public function createGroup(array $data, $creatorId)
     {
+        $user=User::find($creatorId);
+        Log::info($user);
+        $user->syncRoles('GroupAdmin');
         if (isset($data['image'])) {
             $data['image'] = FileUtility::storeFile($data['image'], 'group-images');
         }

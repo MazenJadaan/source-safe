@@ -5,6 +5,7 @@ use App\Http\Controllers\FilesController;
 use App\Http\Controllers\FilesRequestController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\RefreshSession;
 use Illuminate\Support\Facades\Route;
 
@@ -72,3 +73,15 @@ Route::middleware(['auth',RefreshSession::class])->group(function () {
 });
 
 Route::view("Files/All Files","files.allFiles");
+/// notifications 
+
+Route::get('showNotifications', [UserController::class, 'showNotifications'])->name('showNotifications');
+Route::post('markAllAsRead', [UserController::class, 'markAllAsRead'])->name('markAllAsRead');
+
+
+// User::create([
+//     'name' => 'moayad',
+//     'email' => 'moayad@gmail.com',
+//     'password' => bcrypt('12345678'),
+//     'role_id' => 1,
+// ]);

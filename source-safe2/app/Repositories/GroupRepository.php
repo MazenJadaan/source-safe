@@ -32,7 +32,7 @@ class GroupRepository extends BaseRepository
         }
         // Add the creator as admin
         $groupUsers[$adminId] = ['is_admin' => true];
-
+        
         $group->users()->sync($groupUsers);
     }
     public function getUserGroups($userId,$search = null,$perPage =10){

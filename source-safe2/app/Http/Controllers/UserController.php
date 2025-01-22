@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -25,6 +26,17 @@ class UserController extends Controller
         $user = $this->userService->findById($id);
         return $user ? response()->json($user) : response()->json(['message' => 'User not found'], 404);
     }
+    public function showNotifications()
+{
+    $notifications = Auth::user()->notifications; // Or unreadNotifications
+    return view('notifications.index', compact('notifications'));
+}
+public function markAllAsRead()
+{
+    Auth::user()->unreadNotifications->markAsRead();
+    return redirect()->route('showNotifications');
+}
+
 
 
 }
