@@ -17,6 +17,9 @@ return new class extends Migration
             $table->integer('file_id');
             $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
             $table->integer('version');
+            $table->string('contentChanges')->nullable();
+            $table->string('hash'); // تجزئة الملف
+
             $table->integer('updated_by');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

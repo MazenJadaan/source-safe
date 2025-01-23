@@ -11,12 +11,23 @@ class BackupFile extends Model
         'path',
         'file_id',
         'version',
-        'updated_by'
+        'updated_by',
+        'contentChanges',
+        'hash'
     ];
 
     public function file()
     {
         return $this->belongsTo(File::class);
+    }
+    // تنسيق رقم النسخة
+    public function getVersionNumberAttribute()
+    {
+        return 'v' . $this->version;
+    }
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 
     public function user()

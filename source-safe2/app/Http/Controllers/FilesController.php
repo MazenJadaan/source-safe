@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UploadFileRequest;
+use App\Models\File;
 use App\Models\User;
 use App\Services\FilesService;
 use App\Services\GroupService;
@@ -84,11 +85,18 @@ class FilesController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-    public function tracing(Request $request){
-        $user = Auth::user();
-        // $search = $request->input('search');
-        // $files = $this->filesService->getMyReservationFiles($user,$search,5);
-        $files=User::all();
+    public function tracing(Request $request)
+    {
+        $files = File::with([
+            'group',
+            'creator',
+            'backupFiles' => function($query) {
+                $query->latest();
+            },
+            'backupFiles.updater'
+        ])->paginate(10); // التقسيم ل 10 عناصر بالصفحة
+    
         return view('files.tracing', compact('files'));
     }
+
 }

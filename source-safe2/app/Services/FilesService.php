@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use App\Models\BackupFile;
 use App\Repositories\BackUpFilesRepository;
 use App\Repositories\FilesRepository;
 use App\Repositories\OperationRepository;
 use App\Utils\FileUtility;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class FilesService
@@ -48,10 +50,7 @@ class FilesService
             // البحث عن الملف بالحالة "free" والإصدار المطلوب
             $file = $this->FilesRepository->findFreeFileWithVersion($fileId, $version);
 
-            if (!$file) {
-                throw new \Exception('The file has already reserved by another user.');
-            }
-
+          
             // تحديث حالة الملف والإصدار
             $this->FilesRepository->updateFileStatusAndVersion(
                 $file->id,
@@ -71,36 +70,86 @@ class FilesService
     public function checkOut($fileId, $newFile)
     {
         DB::transaction(function () use ($fileId, $newFile) {
-
+    
             $file = $this->FilesRepository->findById($fileId);
+    
+            // if (!$file || $file->status !== 'reserved') {
+            //     Log::info("TThe file is not reserved or does not exist. ");
 
-            if (!$file || $file->status !== 'reserved') {
-                throw new \Exception('The file is not reserved or does not exist.');
-            }
-
-            $backupPath = 'backup_files/' . basename($file->path);
+            // }
+    
+            // عمل نسخة احتياطية من الملف القديم
+            $backupPath = 'files/' . basename($file->path);
             Storage::disk('public')->move($file->path, $backupPath);
-
-
-            $this->BackUpFilesRepository->create([
+    
+            // حساب التجزئة للملف الجديد
+            $fileContent = file_get_contents($newFile->getRealPath());
+            $newHash = hash('sha256', $fileContent);
+    
+            // جلب أحدث نسخة من قاعدة البيانات
+            $latestVersion = BackupFile::where('file_id', $fileId)
+                                        ->orderBy('created_at', 'desc')
+                                        ->first();
+    
+            // if ($latestVersion && $latestVersion->hash === $newHash) {
+            //     Log::info("The new file is identical to the latest version. Update rejected ");
+            // }
+    
+            // تسجيل الفرق بين الملفات في السجل
+            $oldFileContent = file_get_contents(storage_path('app/public/' . $backupPath));
+            $diff = $this->calculateDiff($oldFileContent, $fileContent);
+            Log::info("File differences for File ID $fileId:", ['diff' => $diff]);
+    
+            // إضافة النسخة الاحتياطية الجديدة
+           $n= $this->BackUpFilesRepository->create([
                 'path' => $backupPath,
                 'file_id' => $file->id,
-                'version' => $file->version - 1 ,
+                'version' => ($latestVersion->version ?? 0) + 1,
+                'hash' => $newHash,
+                'contentChanges'=>$diff,
                 'updated_by' => auth()->id(),
             ]);
+            Log::info("File n for File ID $fileId:", ['n' => $n]);
 
+            // تحديث مسار الملف الجديد
             $newFilePath = $newFile->storeAs('files', basename($file->path), 'public');
+            Log::info("newFilePath n for File ID $fileId:", ['newFilePath' => $newFilePath]);
 
-            $this->FilesRepository->updateFileAfterCheckOut(
+            // تحديث حالة الملف الأصلي
+           $upd= $this->FilesRepository->updateFileAfterCheckOut(
                 $fileId,
                 $newFilePath,
-                'free', // Change status to 'free'
-                null    // Remove the reservation
+                'free', // تغيير الحالة إلى 'free'
+                null    // إزالة الحجز
             );
+            Log::info("upd n for File ID $fileId:", ['upd' => $upd]);
 
-            // Log the check-out operation
-            $this->OperationRepository->logOperation($fileId, auth()->id(), 'check_out');
+            // تسجيل العملية
+           $log= $this->OperationRepository->logOperation($fileId, auth()->id(), 'check_out');
+            Log::info("log n for File ID $fileId:", ['log' => $log]);
+
         });
     }
+    
+    /**
+     * حساب الفروقات بين ملفين.
+     */
+    private function calculateDiff($oldContent, $newContent)
+    {
+        $oldLines = explode(PHP_EOL, $oldContent);
+        $newLines = explode(PHP_EOL, $newContent);
+    
+        $diff = [];
+        foreach ($oldLines as $index => $line) {
+            if (!isset($newLines[$index]) || $line !== $newLines[$index]) {
+                $diff[] = "Line " . ($index + 1) . ": \nOld: " . ($line ?: 'NULL') . "\nNew: " . ($newLines[$index] ?? 'NULL');
+
+            }
+        }
+    return implode(PHP_EOL . str_repeat('-', 20) . PHP_EOL, $diff);
+
+        return $diff;
+    }
+    
 
 }

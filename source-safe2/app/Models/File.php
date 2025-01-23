@@ -41,7 +41,18 @@ protected $fillable = [
     {
         return $this->hasMany(BackupFile::class);
     }
+    
+  
 
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+   // أحدث نسخة
+   public function getLatestVersionAttribute()
+   {
+       return $this->backupFiles()->latest()->first();
+   }
     public function operations()
     {
         return $this->hasMany(Operation::class);
