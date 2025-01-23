@@ -44,6 +44,11 @@ class AuthController extends Controller
 
         return redirect()->back()->with(['error' => 'Password is incorrect.']);
     }
+    public function testlogin(AuthRequest $request)
+    {
+
+    return $request;
+}
 
 
     public function logout(Request $request)

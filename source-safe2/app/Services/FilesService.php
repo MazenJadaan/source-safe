@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\BackupFile;
+use App\Models\File;
+use App\Models\Group;
+use App\Notifications\UserNotification;
 use App\Repositories\BackUpFilesRepository;
 use App\Repositories\FilesRepository;
 use App\Repositories\OperationRepository;
@@ -61,6 +64,21 @@ class FilesService
 
             // تسجيل العملية في جدول العمليات
             $this->OperationRepository->logOperation($file->id, auth()->id(), 'check_in');
+
+
+
+            //
+          $group_id= File::where('id',$fileId)->pluck('group_id');
+          
+            $group=Group::find($group_id[0]);
+            $groupUsers=$group->users;
+            Log::info($groupUsers);
+            foreach ($groupUsers as $user) {
+               $notification=$user->notify(new UserNotification([
+                'title' => '📂 تحديث جديد على الملف!',
+                'message' => "The user " . auth()->user()->name . " performed a '" . __('check-in') . "' operation on the file '" . $file->name . "' in the group '" . $group->name . "'. You can check the details now.",
+                'url' => "/my-files",
+            ]));}
 
             // إرجاع مسار الملف لتحميله
             return storage_path("app/public/{$file->path}");
@@ -128,6 +146,18 @@ class FilesService
            $log= $this->OperationRepository->logOperation($fileId, auth()->id(), 'check_out');
             Log::info("log n for File ID $fileId:", ['log' => $log]);
 
+            $group_id= File::where('id',$fileId)->pluck('group_id');
+          
+            $group=Group::find($group_id[0]);
+            $groupUsers=$group->users;
+            Log::info($groupUsers);
+            foreach ($groupUsers as $user) {
+               $notification=$user->notify(new UserNotification([
+                'title' => '📂 تحديث جديد على الملف!',
+                'message' => "The user " . auth()->user()->name . " performed a '" . __('check-out') . "' operation on the file '" . $file->name . "' in the group '" . $group->name . "'. You can check the details now.",
+                'url' => "/my-files",
+            ]));}
+    
         });
     }
     

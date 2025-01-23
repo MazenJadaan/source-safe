@@ -9,6 +9,7 @@ use App\Services\FilesService;
 use App\Services\GroupService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Lcobucci\JWT\Exception;
 
 class FilesController extends Controller
@@ -49,6 +50,7 @@ class FilesController extends Controller
     }
     public function checkIn(Request $request, $id)
     {
+        Log::info($request);
         $request->validate([
             'version' => 'required|integer',
         ]);
