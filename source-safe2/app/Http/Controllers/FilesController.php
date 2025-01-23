@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UploadFileRequest;
+use App\Models\User;
 use App\Services\FilesService;
 use App\Services\GroupService;
 use Illuminate\Http\Request;
@@ -43,6 +44,14 @@ class FilesController extends Controller
         $search = $request->input('search');
         $files = $this->filesService->getMyReservationFiles($user,$search,5);
         return view('files.user-reservation-files', compact('files'));
+
+    }
+    public function tracing(Request $request){
+        $user = Auth::user();
+        // $search = $request->input('search');
+        // $files = $this->filesService->getMyReservationFiles($user,$search,5);
+        $files=User::all();
+        return view('files.tracing', compact('files'));
 
     }
 }

@@ -19,6 +19,6 @@
                 <li><a href="{{route('my.reservation.files')}}"><i class="bi-file-text-fill"></i> My Files</a></li>
 
         <li class="section-title">Reports</li>
-        <li><a href="#"><i class="bi-folder-fill" ></i>Tracing</a></li>
+        <li><a href="{{route('tracing')}}"><i class="bi-folder-fill" ></i>Tracing</a></li>
     </ul>
 </div>

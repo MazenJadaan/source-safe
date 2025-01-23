@@ -78,6 +78,10 @@ Route::view("Files/All Files","files.allFiles");
 Route::get('showNotifications', [UserController::class, 'showNotifications'])->name('showNotifications');
 Route::post('markAllAsRead', [UserController::class, 'markAllAsRead'])->name('markAllAsRead');
 
+//
+//tracing
+Route::get('tracing', [FilesController::class, 'tracing'])->name('tracing');
+
 
 // User::create([
 //     'name' => 'moayad',
