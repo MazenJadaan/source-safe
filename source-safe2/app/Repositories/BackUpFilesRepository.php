@@ -10,4 +10,5 @@ class BackUpFilesRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
 }

@@ -15,8 +15,14 @@ class FileUtility
      */
     public static function storeFile($file, $directory = 'uploads')
     {
-        // Store the file in the specified directory under the `public` disk
-        return $file->store($directory, 'public');
+        $originalName = $file->getClientOriginalName();
+
+        // Generate a unique file name to avoid overwriting
+        $uniqueName = time() . '_' . $originalName;
+
+        // Store the file with the original name under the `public` disk
+        return $file->storeAs($directory, $uniqueName, 'public');
+
     }
 
     /**

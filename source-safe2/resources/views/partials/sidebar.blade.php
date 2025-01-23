@@ -16,7 +16,8 @@
 
         <li class="section-title">Files</li>
                <li><a href="{{route('user.files')}}"><i class="bi-folder-fill" ></i>Files</a></li>
-                <li><a href="{{route('my.reservation.files')}}"><i class="bi-file-text-fill"></i> My Files</a></li>
+               <li><a href="{{route('my.reservation.files')}}"><i class="bi-file-text-fill"></i> My Files</a></li>
+              <li><a href="{{route('my.reservation.files')}}"><i class="bi-file-text-fill"></i> Add Files Request</a></li>
 
         <li class="section-title">Reports</li>
         <li><a href="{{route('tracing')}}"><i class="bi-folder-fill" ></i>Tracing</a></li>

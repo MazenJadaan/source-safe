@@ -38,35 +38,6 @@
                     </div>
                 </div>
 
-                <!-- Card 3: File Reports -->
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100" style="background-color: #CAF0F8; border-radius: 10px; border: none;">
-                        <div class="card-body position-relative">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="card-title fw-bold text-dark" style="font-size: 1.5rem;">File Reports</h4>
-                                <i class="bi bi-file-earmark-bar-graph" style="font-size: 2rem; color: #03045E;"></i>
-                            </div>
-                            <p class="card-text text-dark">Generate and view reports about group files.</p>
-                            <hr style="border: 1px solid #0077B6; margin: 15px 0;">
-                            <a href="#" class="stretched-link text-decoration-none" style="color: #0077B6;">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4: Member Reports -->
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100" style="background-color: #CAF0F8; border-radius: 10px; border: none;">
-                        <div class="card-body position-relative">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="card-title fw-bold text-dark" style="font-size: 1.5rem;">Member Reports</h4>
-                                <i class="bi bi-bar-chart" style="font-size: 2rem; color: #03045E;"></i>
-                            </div>
-                            <p class="card-text text-dark">Generate detailed reports about group members.</p>
-                            <hr style="border: 1px solid #0077B6; margin: 15px 0;">
-                            <a href="#" class="stretched-link text-decoration-none" style="color: #0077B6;">Read More</a>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Card 5: Add File Order -->
                 <div class="col-md-6">

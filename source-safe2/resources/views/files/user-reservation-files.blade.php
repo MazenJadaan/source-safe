@@ -56,11 +56,12 @@
                     <td>
                         <div>
                             @if($file->status === 'reserved')
-                                <form action="#" method="POST" class="d-inline-block">
+                                <form action="{{ route('files.checkOut', $file->id) }}" method="POST" class="d-inline-block" enctype="multipart/form-data">
                                     @csrf
-                                    <button type="submit" class="btn btn-outline-danger btn-sm" title="Check Out File">
+                                    <label for="file-upload-{{ $file->id }}" class="btn btn-outline-danger btn-sm" title="Check Out File">
                                         <i class="bi bi-box-arrow-right"></i> Check Out
-                                    </button>
+                                    </label>
+                                    <input type="file" name="file" id="file-upload-{{ $file->id }}" class="d-none" onchange="this.form.submit()">
                                 </form>
                             @endif
                         </div>

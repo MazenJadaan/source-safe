@@ -55,9 +55,10 @@ Route::middleware(['auth',RefreshSession::class])->group(function () {
     Route::get('files', [FilesController::class, 'getFilesUser'])->name('user.files');
     Route::get('my-files', [FilesController::class, 'getMyFiles'])->name('my.reservation.files');
 
+    Route::post('/files/{id}/check-in', [FilesController::class, 'checkIn'])->name('files.check-in');
+    Route::post('/files/{id}/check-out', [FilesController::class, 'checkOut'])->name('files.checkOut');
 
-    Route::post('/files/{file}/check-out', [FilesController::class, 'checkOut'])->name('files.check_out');
-    Route::post('/files/{file}/check-in', [FilesController::class, 'checkIn'])->name('files.check_in');
+
     Route::get('/files/{file}/backups', [FilesController::class, 'viewBackups'])->name('files.backups');
 
 
@@ -73,7 +74,7 @@ Route::middleware(['auth',RefreshSession::class])->group(function () {
 });
 
 Route::view("Files/All Files","files.allFiles");
-/// notifications 
+/// notifications
 
 Route::get('showNotifications', [UserController::class, 'showNotifications'])->name('showNotifications');
 Route::post('markAllAsRead', [UserController::class, 'markAllAsRead'])->name('markAllAsRead');

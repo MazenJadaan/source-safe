@@ -31,4 +31,12 @@ class OperationRepository extends BaseRepository
     {
         return Operation::where('user_id', $userId)->with('file')->get();
     }
+    public function logOperation($fileId, $userId, $type)
+    {
+        Operation::create([
+            'file_id' => $fileId,
+            'user_id' => $userId,
+            'type' => $type,
+        ]);
+    }
     }
