@@ -45,4 +45,42 @@ class FilesController extends Controller
         return view('files.user-reservation-files', compact('files'));
 
     }
+    public function checkIn(Request $request, $id)
+    {
+        $request->validate([
+            'version' => 'required|integer',
+        ]);
+
+        try {
+            // استدعاء الخدمة لتحديث الحالة
+            $filePath = $this->filesService->checkIn($id, $request->input('version'));
+
+            session()->flash('success', 'File checked-in successfully.');
+
+            // تحميل الملف
+            return response()->download($filePath);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+
+            // Redirect back or to another page with the error message
+            return redirect()->back();
+        }
+    }
+    public function checkOut(Request $request, $id)
+    {
+        $request->validate([
+            'file' => 'required|file', // تحقق من رفع الملف
+        ]);
+
+        try {
+            // استدعاء الخدمة لتنفيذ العملية
+            $this->filesService->checkOut($id, $request->file('file'));
+
+            // إعادة التوجيه مع رسالة نجاح
+            return redirect()->back()->with('success', 'File checked-out and updated successfully.');
+        } catch (\Exception $e) {
+            // إعادة التوجيه مع رسالة خطأ
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 }

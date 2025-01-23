@@ -72,8 +72,9 @@
                         <div>
                             <a href="{{ route('file.reports', $file->id) }}" class="btn btn-sm" style="background-color: #0077B6; color: white">Report</a>
                         @if($file->status === 'free')
-                                <form action="#" method="POST" class="d-inline-block">
+                                    <form action="{{ route('files.check-in', $file->id) }}" method="POST" class="d-inline-block">
                                     @csrf
+                                        <input type="hidden" name="version" value="{{ $file->version }}">
                                     <button type="submit" class="btn btn-outline-primary btn-sm" title="Reserve and Download File">
                                         <i class="bi bi-box-arrow-in-down"></i> Check In
                                     </button>

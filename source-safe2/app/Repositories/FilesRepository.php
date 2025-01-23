@@ -41,7 +41,7 @@ class FilesRepository extends BaseRepository
                 ->from('operations')
                 ->where('user_id', $userId)
                 ->where('type', 'check_in');
-        });
+        })->where('status','reserved');
 
         // Apply search if provided
         if ($search) {
@@ -58,6 +58,34 @@ class FilesRepository extends BaseRepository
 
         // Apply pagination
         return $query->paginate($perPage);
+    }
+    public function findFreeFileWithVersion($fileId, $version)
+    {
+        return File::where('id', $fileId)
+            ->where('status', 'free')
+            ->where('version', $version)
+            ->first();
+    }
+
+    public function updateFileStatusAndVersion($fileId, $status, $reservedBy, $newVersion)
+    {
+        return File::where('id', $fileId)
+            ->update([
+                'status' => $status,
+                'reserved_by' => $reservedBy,
+                'version' => $newVersion,
+                'updated_at' => now(),
+            ]);
+    }
+    public function updateFileAfterCheckOut($fileId, $newPath, $status, $reservedBy)
+    {
+        return File::where('id', $fileId)
+            ->update([
+                'path' => $newPath,
+                'status' => $status,
+                'reserved_by' => $reservedBy,
+                'updated_at' => now(),
+            ]);
     }
 
 }

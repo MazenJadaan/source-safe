@@ -12,10 +12,15 @@ protected $fillable = [
     'status',
     'approval_status',
     'group_id',
+    'reserved_by',
+    'version',
     'created_by',
     'updated_by'
 ];
-
+    public function isFree()
+    {
+        return $this->status === 'free';
+    }
 
 
     public function group()

@@ -23,6 +23,7 @@
     </div>
 @endif
 
+
 <script>
     setTimeout(() => {
         const alerts = document.querySelectorAll('.alert');
